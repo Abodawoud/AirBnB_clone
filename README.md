@@ -1,2 +1,3 @@
-# AirBnB_clone
-Clone AirBnB_Website
+# Clone AirBnB_Website
+
+![Alt text](image.png)
