@@ -4,6 +4,7 @@
 
 from datetime import datetime
 from uuid import uuid4
+from models import storage
 
 
 class BaseModel:
@@ -14,7 +15,7 @@ class BaseModel:
 
         if kwargs:
             for key, value in kwargs.items():
-                if key is not '__class__':
+                if key != '__class__':
                     if key == 'updated_at' or key == 'created_at':
                         self.__dict__[key] = datetime.fromisoformat(value)
                     else:
@@ -23,6 +24,7 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self) -> str:
         return f"[BaseModel] ({self.id}) {self.__dict__}"
@@ -32,6 +34,8 @@ class BaseModel:
         with the current datetime"""
 
         self.updated_at = datetime.now()
+        storage.new(self)
+        storage.save()
 
     def to_dict(self) -> dict:
         """returns a dictionary containing all keys/values \
