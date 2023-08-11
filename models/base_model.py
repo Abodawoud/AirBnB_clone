@@ -27,7 +27,7 @@ class BaseModel:
             storage.new(self)
 
     def __str__(self) -> str:
-        return f"[BaseModel] ({self.id}) {self.__dict__}"
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         """updates the public instance attribute updated_at \
@@ -42,12 +42,9 @@ class BaseModel:
         of __dict__ of the instance"""
 
         dictionary = dict(self.__dict__)
-        dictionary['__class__'] = 'BaseModel'
+        dictionary['__class__'] = self.__class__.__name__
         dictionary['created_at'] = \
             datetime.isoformat(dictionary.get('created_at'))
         dictionary['updated_at'] = \
             datetime.isoformat(dictionary.get('updated_at'))
         return dictionary
-
-
-
