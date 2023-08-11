@@ -1,27 +1,34 @@
 #!/usr/bin/python3
+"""cmd module to make command interpreter"""
 
 
 import cmd
 from models.base_model import BaseModel
 from models import storage
 
+
 class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
 
     def do_EOF(self, line):
-
+        """EOF command to exit the program"""
         print()
         return True
 
     def do_quit(self, line):
+        """Quit command to exit the program"""
 
         return True
 
     def emptyline(self):
+        """emptyline command to execute anything"""
+
         pass
 
     def do_create(self, line):
+        """Creates a new instance"""
+
         if line:
             if line != "BaseModel":
                 print("** class doesn't exist **")
@@ -33,6 +40,9 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
 
     def do_show(self, line):
+        """Prints the string representation of \
+            an instance based on the class name and id"""
+
         if line:
             list_line = line.split(" ")
             if list_line[0] != "BaseModel":
@@ -53,6 +63,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
 
     def do_destroy(self, line):
+        """Deletes an instance based on the class name and id"""
+
         if line:
             list_line = line.split(" ")
             if list_line[0] != "BaseModel":
@@ -74,6 +86,9 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
 
     def do_all(self, line):
+        """Prints all string representation of all\
+            instances based or not on the class name"""
+
         new_list = []
         dic = storage.all()
         for value in dic.values():
@@ -87,6 +102,8 @@ class HBNBCommand(cmd.Cmd):
             print(new_list)
 
     def do_update(self, line):
+        """Updates an instance based on the class name and id"""
+
         list_line = line.split(" ")
         if line:
             list_line = line.split(" ")
