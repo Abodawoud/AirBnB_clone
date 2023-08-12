@@ -3,6 +3,7 @@
 
 
 import cmd
+import sys
 from models.base_model import BaseModel
 from models.user import User
 from models.city import City
@@ -15,11 +16,15 @@ from models import storage
 
 class HBNBCommand(cmd.Cmd):
 
+
     prompt = "(hbnb) "
+
+
     list_of_classes = ["BaseModel", "User", "City", "State", "Amenity", "Review", "Place"]
 
     def do_EOF(self, line):
         """EOF command to exit the program"""
+
         print()
         return True
 
@@ -141,4 +146,5 @@ class HBNBCommand(cmd.Cmd):
 
 
 if __name__ == '__main__':
+
     HBNBCommand().cmdloop()
