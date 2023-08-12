@@ -165,7 +165,7 @@ class HBNBCommand(cmd.Cmd):
                         cnt += 1
                 print(cnt)
 
-            elif method[:4] == "show":
+            elif method[:6] == "show(\"" and method[-2:] == "\")":
                 for key, value in dic.items():
                     cls_name = str(key).split(".")
                     if cls == cls_name[0]:
@@ -173,13 +173,17 @@ class HBNBCommand(cmd.Cmd):
                         self.do_show(line)
                         break
 
-            elif method[:7] == "destroy":
+            elif method[:9] == "destroy(\"" and method[-2:] == "\")":
                 for key, value in dic.items():
                     cls_name = str(key).split(".")
                     if cls == cls_name[0]:
                         line = f"{cls} {method[9:-2]}"
                         self.do_destroy(line)
                         break
+            else:
+                return cmd.Cmd.default(self, line)
+        else:
+                return cmd.Cmd.default(self, line)
 
 
 if __name__ == '__main__':
