@@ -26,7 +26,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(my_model.__class__.__name__, str)
         self.assertEqual(my_model.__class__.__name__, 'BaseModel')
         self.assertIsInstance(my_model.my_number, int)
-        pr_my_model = f"[{my_model.__class__.__name__}] ({my_model.id}) {my_model.__dict__}"
+        pr_my_model = f"[{my_model.__class__.__name__}] ({my_model.id})\
+{my_model.__dict__}"
         self.assertEqual(str(my_model), pr_my_model)
 
         my_model_json = my_model.to_dict()
@@ -41,6 +42,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(my_model_json['__class__'], 'BaseModel')
         self.assertIsInstance(my_model_json['my_number'], int)
         self.assertIsInstance(my_model_json, dict)
+        self.assertEqual(my_model_json['created_at'],
+                         datetime.isoformat(my_model.created_at))
 
         my_model.save()
 
