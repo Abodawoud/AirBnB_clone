@@ -9,8 +9,11 @@ from models.base_model import BaseModel
 
 
 class TestBaseModel(unittest.TestCase):
+    """unittest_BaseModel"""
 
-    def test_args(self):
+    def test_types(self):
+        """test for types"""
+
         my_model = BaseModel()
         my_model.name = "My First Model"
         my_model.my_number = 89
@@ -35,5 +38,3 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(my_model_json['__class__'], str)
         self.assertEqual(my_model_json['__class__'], 'BaseModel')
         self.assertIsInstance(my_model_json['my_number'], int)
-
-
