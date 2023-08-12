@@ -143,7 +143,20 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class name missing **")
 
+    def default(self, line):
+        """specfic commands"""
+
+        if '.' in line:
+            cls, method = line.split(".")
+            if method == 'all()':
+                list_of_cls = []
+                dic = storage.all()
+                for key, value in dic.items():
+                    cls_name = str(key).split(".")
+                    if cls == cls_name[0]:
+                        list_of_cls.append(str(value))
+                print(f"[{list_of_cls}]")
+
 
 if __name__ == '__main__':
-
     HBNBCommand().cmdloop()
