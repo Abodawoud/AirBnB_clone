@@ -28,16 +28,25 @@ class FileStorage:
             dic = {}
             for key, value in self.__objects.items():
                 dic[key] = value.to_dict()
-            json.dump(dic, f, indent=2)
+            json.dump(dic, f)
 
     def reload(self):
-        """"deserializes the JSON file to __objects (only if the JSON file (__file_path) exists ;\
-            otherwise, do nothing. If the file doesn't exist, no exception should be raised)"""
+        """"deserializes the JSON file to __objects ; \
+            otherwise, do nothing"""
 
         from models.base_model import BaseModel
         from models.user import User
+        from models.city import City
+        from models.state import State
+        from models.amenity import Amenity
+        from models.review import Review
+        from models.place import Place
 
-        new_list = {"User": User, "BaseModel": BaseModel}
+        new_list = {
+                    "User": User, "BaseModel": BaseModel, "City": City,
+                    "State": State, "Amenity": Amenity, "Review": Review,
+                    "Place": Place
+                }
         try:
             with open(self.__file_path, "r", encoding='utf-8') as f:
                 dic = json.load(f)

@@ -4,12 +4,19 @@
 
 import cmd
 from models.base_model import BaseModel
+from models.user import User
+from models.city import City
+from models.state import State
+from models.amenity import Amenity
+from models.review import Review
+from models.place import Place
 from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
+    list_of_classes = ["BaseModel", "User", "City", "State", "Amenity", "Review", "Place"]
 
     def do_EOF(self, line):
         """EOF command to exit the program"""
@@ -30,10 +37,10 @@ class HBNBCommand(cmd.Cmd):
         """Creates a new instance"""
 
         if line:
-            if line != "BaseModel":
+            if line not in HBNBCommand.list_of_classes:
                 print("** class doesn't exist **")
             else:
-                instance = BaseModel()
+                instance = eval(f"{line}()")
                 instance.save()
                 print(instance.id)
         else:
@@ -45,7 +52,7 @@ class HBNBCommand(cmd.Cmd):
 
         if line:
             list_line = line.split(" ")
-            if list_line[0] != "BaseModel":
+            if list_line[0] not in HBNBCommand.list_of_classes:
                 print("** class doesn't exist **")
             elif len(list_line) == 1:
                 print("** instance id missing **")
@@ -53,7 +60,7 @@ class HBNBCommand(cmd.Cmd):
                 dic = storage.all()
                 flag = 0
                 for key, value in dic.items():
-                    if f"BaseModel.{list_line[1]}" == key:
+                    if f"{list_line[0]}.{list_line[1]}" == key:
                         print(value)
                         flag = 1
                         break
@@ -67,7 +74,7 @@ class HBNBCommand(cmd.Cmd):
 
         if line:
             list_line = line.split(" ")
-            if list_line[0] != "BaseModel":
+            if list_line[0] not in HBNBCommand.list_of_classes:
                 print("** class doesn't exist **")
             elif len(list_line) == 1:
                 print("** instance id missing **")
@@ -75,7 +82,7 @@ class HBNBCommand(cmd.Cmd):
                 dic = storage.all()
                 flag = 0
                 for key, value in dic.items():
-                    if f"BaseModel.{list_line[1]}" == key:
+                    if f"{list_line[0]}.{list_line[1]}" == key:
                         del dic[key]
                         storage.save()
                         flag = 1
@@ -94,7 +101,7 @@ class HBNBCommand(cmd.Cmd):
         for value in dic.values():
             new_list.append(str(value))
         if line:
-            if line != "BaseModel":
+            if line not in HBNBCommand.list_of_classes:
                 print("** class doesn't exist **")
             else:
                 print(new_list)
@@ -107,7 +114,7 @@ class HBNBCommand(cmd.Cmd):
         list_line = line.split(" ")
         if line:
             list_line = line.split(" ")
-            if list_line[0] != "BaseModel":
+            if list_line[0] not in HBNBCommand.list_of_classes:
                 print("** class doesn't exist **")
             elif len(list_line) == 1:
                 print("** instance id missing **")
@@ -115,7 +122,7 @@ class HBNBCommand(cmd.Cmd):
                 dic = storage.all()
                 flag = 0
                 for key, value in dic.items():
-                    if f"BaseModel.{list_line[1]}" == key:
+                    if f"{list_line[0]}.{list_line[1]}" == key:
                         if len(list_line) == 2:
                             print("** attribute name missing **")
                             flag = 1
