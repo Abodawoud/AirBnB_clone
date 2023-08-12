@@ -15,12 +15,11 @@ from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
-
+    """class commands"""
 
     prompt = "(hbnb) "
-
-
-    list_of_classes = ["BaseModel", "User", "City", "State", "Amenity", "Review", "Place"]
+    list_of_classes = ["BaseModel", "User",
+                       "City", "State", "Amenity", "Review", "Place"]
 
     def do_EOF(self, line):
         """EOF command to exit the program"""
