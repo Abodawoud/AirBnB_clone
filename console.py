@@ -147,15 +147,23 @@ class HBNBCommand(cmd.Cmd):
         """specfic commands"""
 
         if '.' in line:
+            dic = storage.all()
             cls, method = line.split(".")
             if method == 'all()':
                 list_of_cls = []
-                dic = storage.all()
                 for key, value in dic.items():
                     cls_name = str(key).split(".")
                     if cls == cls_name[0]:
                         list_of_cls.append(str(value))
                 print(f"[{list_of_cls}]")
+
+            elif method == "count()":
+                cnt = 0
+                for key, value in dic.items():
+                    cls_name = str(key).split(".")
+                    if cls == cls_name[0]:
+                        cnt += 1
+                print(cnt)
 
 
 if __name__ == '__main__':
