@@ -41,8 +41,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(my_model_json['__class__'], 'BaseModel')
         self.assertIsInstance(my_model_json['my_number'], int)
         self.assertIsInstance(my_model_json, dict)
-        self.assertEqual(my_model_json['created_at'],
-                         datetime.isoformat(my_model.created_at))
+        self.assertEqual(my_model_json['created_at'], datetime.isoformat(my_model.created_at))
 
         my_model.save()
 
