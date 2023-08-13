@@ -41,7 +41,15 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(obj_json['__class__'], 'BaseModel')
         self.assertIsInstance(obj_json['my_number'], int)
         self.assertIsInstance(obj_json, dict)
+        self.assertEqual
+        (obj_json['updated_at'], datetime.isoformat(obj.updated_at))
+        self.assertEqual
+        (obj_json['created_at'], datetime.isoformat(obj.created_at))
 
         obj.save()
 
         self.assertNotEqual(obj.updated_at, obj.created_at)
+
+        obj2 = BaseModel()
+        self.assertNotEqual(obj.id, obj2.id)
+        self.assertNotEqual(obj, obj2)
