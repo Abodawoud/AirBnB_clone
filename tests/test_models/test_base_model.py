@@ -46,7 +46,12 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual
         (obj_json['created_at'], datetime.isoformat(obj.created_at))
 
+        update_time = obj.updated_at
+
         obj.save()
+
+        update_time2 = obj.updated_at
+        self.assertNotEqual(update_time, update_time2)
 
         self.assertNotEqual(obj.updated_at, obj.created_at)
 
