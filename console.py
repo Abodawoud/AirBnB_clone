@@ -183,7 +183,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 return cmd.Cmd.default(self, line)
         else:
-                return cmd.Cmd.default(self, line)
+            return cmd.Cmd.default(self, line)
 
 
 if __name__ == '__main__':
