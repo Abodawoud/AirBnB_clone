@@ -185,7 +185,7 @@ class HBNBCommand(cmd.Cmd):
                     for i in range(len(dic)):
                         li = (dic[i]).split(": ")
                         line = f"{cls} {list_method[0][8:-1]} \
-                        {li[0][1:-1]} {li[1]}"
+{li[0][1:-1]} {li[1]}"
                         self.do_update(line)
                 else:
                     list_method = method.split(", ")
