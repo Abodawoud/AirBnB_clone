@@ -52,3 +52,7 @@ class TestBaseModel(unittest.TestCase):
         my_model.save()
 
         self.assertNotEqual(my_model.updated_at, my_model.created_at)
+
+        my_model2 = BaseModel()
+
+        self.assertNotEqual(my_model, my_model2)
