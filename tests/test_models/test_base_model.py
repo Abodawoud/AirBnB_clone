@@ -19,6 +19,7 @@ class TestBaseModel(unittest.TestCase):
         my_model.my_number = 89
         self.assertEqual(my_model.name, "My First Model")
         self.assertEqual(my_model.my_number, 89)
+        self.assertEqual(my_model.my_number, 89)
         self.assertIsInstance(my_model.id, str)
         self.assertIsInstance(my_model.updated_at, datetime)
         self.assertIsInstance(my_model.created_at, datetime)
@@ -32,19 +33,21 @@ class TestBaseModel(unittest.TestCase):
 
         my_model_json = my_model.to_dict()
 
-        self.assertEqual(my_model_json['name'], "My First Model")
-        self.assertEqual(my_model_json['my_number'], 89)
         self.assertIsInstance(my_model_json['id'], str)
         self.assertIsInstance(my_model_json['updated_at'], str)
         self.assertIsInstance(my_model_json['created_at'], str)
         self.assertIsInstance(my_model_json['name'], str)
         self.assertIsInstance(my_model_json['__class__'], str)
-        self.assertEqual(my_model_json['__class__'], 'BaseModel')
         self.assertIsInstance(my_model_json['my_number'], int)
         self.assertIsInstance(my_model_json, dict)
+        self.assertEqual(my_model_json['id'], my_model.id)
+        self.assertEqual(my_model_json['name'], "My First Model")
+        self.assertEqual(my_model_json['my_number'], 89)
         self.assertEqual(my_model_json['created_at'],
                          datetime.isoformat(my_model.created_at))
-
+        self.assertEqual(my_model_json['updated_at'],
+                         datetime.isoformat(my_model.updated_at))
+        self.assertEqual(my_model_json['__class__'], 'BaseModel')
         my_model.save()
 
         self.assertNotEqual(my_model.updated_at, my_model.created_at)
