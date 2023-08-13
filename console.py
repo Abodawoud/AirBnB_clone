@@ -134,7 +134,11 @@ class HBNBCommand(cmd.Cmd):
                             print("** value missing **")
                             flag = 1
                         else:
-                            setattr(value, list_line[2], (list_line[3])[1: -1])
+                            if list_line[3][0] == '"':
+                                atr_value = list_line[3][1:-1]
+                            else:
+                                atr_value = int(list_line[3])
+                            setattr(value, list_line[2], atr_value)
                             storage.save()
                             flag = 1
                             break
@@ -172,6 +176,22 @@ class HBNBCommand(cmd.Cmd):
             elif method[:9] == "destroy(\"" and method[-2:] == "\")":
                 line = f"{cls} {method[9:-2]}"
                 self.do_destroy(line)
+
+            elif method[:8] == "update(\"":
+                list_of_char = ['{', '}', ':']
+                if '{' in method:
+                    list_method = method.split(", {")
+                    dic = (list_method[1][:-2]).split(", ")
+                    for i in range(len(dic)):
+                        li = (dic[i]).split(": ")
+                        line = \
+                        f"{cls} {list_method[0][8:-1]} {li[0][1:-1]} {li[1]}"
+                        self.do_update(line)
+                else:
+                    list_method = method.split(", ")
+                    line = f"{cls} {list_method[0][8:-1]} \
+{list_method[1][1:-1]} {list_method[2][:-1]}"
+                    self.do_update(line)
             else:
                 return cmd.Cmd.default(self, line)
         else:
