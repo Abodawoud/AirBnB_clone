@@ -179,7 +179,7 @@ class HBNBCommand(cmd.Cmd):
 
             elif method[:8] == "update(\"":
                 list_of_char = ['{', '}', ':']
-                if method[47] == '{':
+                if '{' in method:
                     list_method = method.split(", {")
                     dic = (list_method[1][:-2]).split(", ")
                     for i in range(len(dic)):
