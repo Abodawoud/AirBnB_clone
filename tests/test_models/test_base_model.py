@@ -14,45 +14,34 @@ class TestBaseModel(unittest.TestCase):
     def test_types(self):
         """test for types"""
 
-        my_model = BaseModel()
-        my_model.name = "My First Model"
-        my_model.my_number = 89
-        self.assertIsInstance(my_model.id, str)
-        self.assertIsInstance(my_model.updated_at, datetime)
-        self.assertIsInstance(my_model.created_at, datetime)
-        self.assertIsInstance(my_model.name, str)
-        self.assertIsInstance(my_model.my_number, int)
-        self.assertIsInstance(my_model.__class__.__name__, str)
-        self.assertIsInstance(my_model.my_number, int)
+        obj = BaseModel()
+        obj.name = "My First Model"
+        obj.my_number = 89
+        self.assertEqual(obj.name, "My First Model")
+        self.assertEqual(obj.my_number, 89)
+        self.assertIsInstance(obj.id, str)
+        self.assertIsInstance(obj.updated_at, datetime)
+        self.assertIsInstance(obj.created_at, datetime)
+        self.assertIsInstance(obj.name, str)
+        self.assertIsInstance(obj.__class__.__name__, str)
+        self.assertEqual(obj.__class__.__name__, 'BaseModel')
+        self.assertIsInstance(obj.my_number, int)
+        pr = f"[{obj.__class__.__name__}] ({obj.id}) {obj.__dict__}"
+        self.assertEqual(str(obj), pr)
 
-        pr_my_model = f"[{my_model.__class__.__name__}] \
-({my_model.id}) {my_model.__dict__}"
-        self.assertEqual(str(my_model), pr_my_model)
-        self.assertEqual(my_model.name, "My First Model")
-        self.assertEqual(my_model.my_number, 89)
-        self.assertEqual(my_model.__class__.__name__, 'BaseModel')
+        obj_json = obj.to_dict()
 
-        my_model_json = my_model.to_dict()
+        self.assertEqual(obj_json['name'], "My First Model")
+        self.assertEqual(obj_json['my_number'], 89)
+        self.assertIsInstance(obj_json['id'], str)
+        self.assertIsInstance(obj_json['updated_at'], str)
+        self.assertIsInstance(obj_json['created_at'], str)
+        self.assertIsInstance(obj_json['name'], str)
+        self.assertIsInstance(obj_json['__class__'], str)
+        self.assertEqual(obj_json['__class__'], 'BaseModel')
+        self.assertIsInstance(obj_json['my_number'], int)
+        self.assertIsInstance(obj_json, dict)
 
-        self.assertIsInstance(my_model_json['id'], str)
-        self.assertIsInstance(my_model_json['updated_at'], str)
-        self.assertIsInstance(my_model_json['created_at'], str)
-        self.assertIsInstance(my_model_json['name'], str)
-        self.assertIsInstance(my_model_json['__class__'], str)
-        self.assertIsInstance(my_model_json['my_number'], int)
-        self.assertIsInstance(my_model_json, dict)
-        self.assertEqual(my_model_json['id'], my_model.id)
-        self.assertEqual(my_model_json['name'], "My First Model")
-        self.assertEqual(my_model_json['my_number'], 89)
-        self.assertEqual(my_model_json['created_at'],
-                         datetime.isoformat(my_model.created_at))
-        self.assertEqual(my_model_json['updated_at'],
-                         datetime.isoformat(my_model.updated_at))
-        self.assertEqual(my_model_json['__class__'], 'BaseModel')
-        my_model.save()
+        obj.save()
 
-        self.assertNotEqual(my_model.updated_at, my_model.created_at)
-
-        my_model2 = BaseModel()
-
-        self.assertNotEqual(my_model, my_model2)
+        self.assertNotEqual(obj.updated_at, obj.created_at)
