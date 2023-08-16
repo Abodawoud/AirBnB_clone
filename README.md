@@ -11,11 +11,53 @@ Welcome to our "AirBnB Clone - The Console" Project! This project aims to replic
 
 1. Clone the project to your local machine "https://github.com/Abodawoud/AirBnB_clone.git"
 
-2. Run the `console.py` file and enjoy
+2. Execute the `console.py` file and enjoy
+
+
+### Execution
+
+####  `In interactive mode`
+
+```
+$ ./console.py
+(hbnb) help
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+
+(hbnb) 
+(hbnb) 
+(hbnb) quit
+$
+```
+
+#### `In non-interactive mode`
+```
+$ echo "help" | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+$
+$ cat test_help
+help
+$
+$ cat test_help | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+$
+```
 
 ### How to use it
 
-After running `console.py` file, you are ready to manage your project's objects by writing commands in this way
+After Execution `console.py` file, you are ready to manage your project's objects by writing commands in this way
 `(hbnb) <command> [agruments]`
 
 | Commands | Description | Arguments |
@@ -29,8 +71,6 @@ After running `console.py` file, you are ready to manage your project's objects 
 | `EOF` | exit the program | -- |
 | `quit` | exit the program | -- |
 ---
-
-
 
 ### 📌 Simple Note :
 ---
