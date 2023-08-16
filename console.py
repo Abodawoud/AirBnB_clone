@@ -137,7 +137,10 @@ class HBNBCommand(cmd.Cmd):
                             if list_line[3][0] == '"':
                                 atr_value = list_line[3][1:-1]
                             else:
-                                atr_value = int(list_line[3])
+                                if list_line[3].isdigit():
+                                    atr_value = int(list_line[3])
+                                else:
+                                    atr_value = list_line[3]
                             setattr(value, list_line[2], atr_value)
                             storage.save()
                             flag = 1
@@ -177,15 +180,15 @@ class HBNBCommand(cmd.Cmd):
                 line = f"{cls} {method[9:-2]}"
                 self.do_destroy(line)
 
-            elif method[:8] == "update(\"":
-                list_of_char = ['{', '}', ':']
-                if '{' in method:
-                    list_method = method.split(", {")
-                    dic = (list_method[1][:-2]).split(", ")
-                    for i in range(len(dic)):
-                        li = (dic[i]).split(": ")
-                        line = f"{cls} {list_method[0][8:-1]} \
-{li[0][1:-1]} {li[1]}"
+            elif method[:8] == "update(\"" and method[-1] == ")":
+                args = method[7:-1].split(", ", 1)
+                if args[1][0] == "{":
+                    dictionary = eval(args[1])
+                    for key, value in dictionary.items():
+                        if type(value) is int:
+                            line = f"{cls} {args[0][1:-1]} {key} {value}"
+                        else:
+                            line = f"{cls} {args[0][1:-1]} {key} \"{value}\""
                         self.do_update(line)
                 else:
                     list_method = method.split(", ")

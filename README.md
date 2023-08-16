@@ -74,10 +74,10 @@ After Execution `console.py` file, you are ready to manage your project's object
 
 ### 📌 Simple Note :
 ---
-provided classes are `{Basemodel, User, State, City, Amenity, Place, Review}`.
+Provided classes are `{Basemodel, User, State, City, Amenity, Place, Review}`.
 
-## Examples
-
+## There are 2 modes to interact with console
+### Interactive example:
 ``` Shell
 ~/alx/AirBnB_clone# ./console.py 
 (hbnb) help
@@ -101,13 +101,35 @@ b51ed93d-b8bc-4f54-ac12-8f5fa4b3f51a
 (hbnb) quit
 ~/alx/AirBnB_clone#
 ```
+### Non-interactive example:
+``` Shell
+~/alx/AirBnB_clone# echo "help" | ./console.py
+(hbnb) 
+Documented commands (type help <topic>):
+========================================
+EOF  all  create  destroy  help  quit  show  update
 
+(hbnb)
+~/alx/AirBnB_clone# cat test_help
+help
+~/alx/AirBnB_clone# cat test_help | ./console.py
+(hbnb)
 
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb)
+~/alx/AirBnB_clone#
+```
+## Contributers 🤝
+ #### Abeer Mosaad:
 
+* [LinkedIn](https://www.linkedin.com/in/abeermosaad/)
 
+* [Twitter](https://twitter.com/Abeer_MOsaad0)
 
+ #### Yousef Abdoawoud:
 
+* [LinkedIn](https://www.linkedin.com/in/abodawoud/)
 
-
-
-
+* [Twitter](https://twitter.com/Abodaawoud)
